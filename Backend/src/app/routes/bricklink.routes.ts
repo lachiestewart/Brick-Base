@@ -1,7 +1,8 @@
-import {Express} from "express"
+import { Express } from "express"
 import * as bricklink from '../controllers/bricklink.controller'
+import { rootUrl } from "./base.routes"
 
 module.exports = (app: Express) => {
-    app.route('/set/:setNumber')
+    app.route(rootUrl + '/set/:setNumber')
         .get(bricklink.getSet)
 }

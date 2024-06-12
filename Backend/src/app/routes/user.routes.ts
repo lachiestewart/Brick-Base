@@ -1,10 +1,11 @@
 import { Express } from "express"
 import * as User from '../controllers/user.controller'
+import { rootUrl } from "./base.routes"
 
 module.exports = (app: Express) => {
-    app.route('/users')
+    app.route(rootUrl + '/users')
         .get(User.getAllUsers)
 
-    app.route('/users/register')
+    app.route(rootUrl + '/users/register')
         .post(User.register)
 }
