@@ -1,7 +1,7 @@
 import axios from 'axios'
 import oauthSignature from 'oauth-signature'
 
-const BASE_URL = 'https://api.bricklink.com/api/store/v1'
+const baseURL = process.env.BRICKLINK_BASE_URL
 
 const consumerKey = process.env.BRICKLINK_CONSUMER_KEY
 const consumerSecret = process.env.BRICKLINK_CONSUMER_SECRET
@@ -9,11 +9,10 @@ const tokenValue = process.env.BRICKLINK_TOKEN_VALUE
 const tokenSecret = process.env.BRICKLINK_TOKEN_SECRET
 
 const bricklink = axios.create({
-    baseURL: BASE_URL,
+    baseURL
 })
 
 interface IOAuthParams {
-    [key: string]: string | number
     oauth_version: '1.0'
     oauth_consumer_key: string
     oauth_token: string
@@ -33,18 +32,20 @@ const generateAuthHeader = (httpMethod: string, endPoint: string): string => {
 
     oauthParams.oauth_signature = oauthSignature.generate(
         httpMethod,
-        BASE_URL + endPoint,
+        baseURL + endPoint,
         oauthParams,
         consumerSecret,
         tokenSecret,
         { encodeSignature: false }
     )
 
-    return 'OAuth realm="", ' + Object.entries(oauthParams).map(([key, value]) => `${key}="${value}"`).join(', ')
+    const authHeader = 'OAuth realm="", ' + Object.entries(oauthParams).map(([key, value]) => `${key}="${value}"`).join(', ')
+
+    return authHeader
 }
 
-const getSet = async (setNumber: string) => {
-    const endPoint = `/items/set/${setNumber}`
+const getItem = async ({ no, type }: BricklinkItemRequest) => {
+    const endPoint = `/items/${type.toLowerCase()}/${no}`
     const authHeader = generateAuthHeader('GET', endPoint)
     const response = await bricklink.get(endPoint, {
         headers: {
@@ -54,4 +55,4 @@ const getSet = async (setNumber: string) => {
     return response.data
 }
 
-export { getSet }
+export { getItem }

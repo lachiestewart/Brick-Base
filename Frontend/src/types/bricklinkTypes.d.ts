@@ -2,7 +2,7 @@ type itemType = 'MINIFIG' | 'PART' | 'SET' | 'BOOK' | 'GEAR' | 'CATALOG' | 'INST
 
 type appearsAsType = 'A' | 'C' | 'E' | 'R'
 
-type BricklinkItem = {
+type bricklinkItem = {
     no: string
     name: string
     type: itemType
@@ -18,33 +18,22 @@ type BricklinkItem = {
     is_obsolete: boolean
     description?: string
     language_code?: string
+
 }
 
-type BricklinkItemRequest = { 
-    no: string
-    type: itemType
-}
-
-type BricklinkSuperset = {
+type bricklinkSuperset = {
     color_id: number
     entries: {
-        item: BricklinkItem
+        item: bricklinkItem
         quantity: number
         appears_as: appearsAsType
     }[]
 }
 
-type BricklinkSupersetRequest = {
-    no: string
-    type: itemType
-    color_id: number
-
-}
-
-type BricklinkSubset = {
+type bricklinkSubset = {
     match_no: number
     entries: {
-        item: BricklinkItem
+        item: bricklinkItem
         color_id: number
         quantity: number
         extra_quantity: number
@@ -53,18 +42,8 @@ type BricklinkSubset = {
     }[]
 }
 
-type BricklinkSubsetRequest = {
-    no: string
-    type: itemType
-    color_id: number
-    box: boolean
-    instruction: boolean
-    break_minifigs: boolean
-    break_subsets: boolean
-}
-
-type BricklinkPriceGuide = {
-    item: BricklinkItem
+type bricklinkPriceGuide = {
+    item: bricklinkItem
     new_or_used: 'N' | 'U'
     currency_code: string
     min_price: string
@@ -73,30 +52,30 @@ type BricklinkPriceGuide = {
     qty_avg_price: string
     unit_quantity: number
     total_quantity: number
-    price_detail: (BricklinkCurrentPriceDetail | BricklinkPastPriceDetail)[]
+    price_detail: (bricklinkCurrentPriceDetail | bricklinkPastPriceDetail)[]
 }
 
-type BricklinkPriceDetail = {
+type bricklinkPriceDetail = {
     quantity: number
     unit_price: string
 }
 
-type BricklinkCurrentPriceDetail = BricklinkPriceDetail & {
+type bricklinkCurrentPriceDetail = bricklinkPriceDetail & {
     shipping_available: boolean
 }
 
-type BricklinkPastPriceDetail = BricklinkPriceDetail & {
+type bricklinkPastPriceDetail = bricklinkPriceDetail & {
     seller_country_code: string
     buyer_country_code: string
     date_ordered: string
 }
 
-type BricklinkKnownColor = {
+type bricklinkKnownColor = {
     color_id: string
     quantity: string
 }
 
-type BricklinkColor = {
+type bricklinkColor = {
     color_id: number
     color_name: string
     color_code: string

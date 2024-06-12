@@ -33,6 +33,9 @@
     ],
     "additionalProperties": false
   },
+
+
+  
   "user_login": {
     "type": "object",
     "properties": {
