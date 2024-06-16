@@ -1,0 +1,28 @@
+{
+    "weakPasswordUser": {
+        "firstName": "John",
+        "lastName": "Johnson",
+        "email": "k2@gmail.com",
+        "password": "johnpassword123"
+    },
+    "validUser": {
+        "firstName": "John",
+        "lastName": "Johnson",
+        "email": "hello@gmail.com",
+        "password": "safePassword123"
+    },
+    "registeredUser": {
+        "username": "kristylincoln99",
+        "email": "k@gmail.com",
+        "firstName": "Kristy",
+        "lastName": "Lincoln",
+        "password": "BYgX7Inm"
+    },
+    "incorrectPasswordUser": {
+        "username": "kristylincoln99",
+        "email": "k@gmail.com",
+        "firstName": "Kristy",
+        "lastName": "Lincoln",
+        "password": "badPassword"
+    }
+}

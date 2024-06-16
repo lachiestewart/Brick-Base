@@ -8,4 +8,11 @@ module.exports = (app: Express) => {
 
     app.route(rootUrl + '/users/register')
         .post(User.register)
+
+    app.route(rootUrl + '/user')
+        .get(User.getUserByEmail)
+
+    app.route(rootUrl + '/users/login')
+        .post(User.login)
+
 }

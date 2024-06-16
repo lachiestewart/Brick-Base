@@ -4,121 +4,141 @@
             "username": "kristylincoln99",
             "email": "k@gmail.com",
             "firstName": "Kristy",
-            "lastName": "Lincoln"
+            "lastName": "Lincoln",
+            "password": "BYgX7Inm"
         },
         {
             "username": "chidianagonye28",
             "email": "c.anagonye@stjohns.edu.au",
             "firstName": "Chidi",
-            "lastName": "Anagonye"
+            "lastName": "Anagonye",
+            "password": "Aqra3NEjhO"
         },
         {
             "username": "tahanial-jamil20",
             "email": "tahani.aljamil@ox.ac.uk",
             "firstName": "Tahani",
-            "lastName": "Al-Jamil"
+            "lastName": "Al-Jamil",
+            "password": "e1r8wtFPH"
         },
         {
             "username": "eleanorshellstrop21",
             "email": "e.shellstrop@hotmail.com",
             "firstName": "Eleanor",
-            "lastName": "Shellstrop"
+            "lastName": "Shellstrop",
+            "password": "qXeZkMYa"
         },
         {
             "username": "fernandobrown57",
             "email": "B@gmail.com",
             "firstName": "Fernando",
-            "lastName": "Brown"
+            "lastName": "Brown",
+            "password": "l8LM0ABqE"
         },
         {
             "username": "jackchen51",
             "email": "jeh128@mail.nz",
             "firstName": "Jack",
-            "lastName": "Chen"
+            "lastName": "Chen",
+            "password": "FsBu07xD"
         },
         {
             "username": "amandafaria39",
             "email": "a@gmail.com",
             "firstName": "Amanda",
-            "lastName": "Faria"
+            "lastName": "Faria",
+            "password": "7N3cpsXcFf"
         },
         {
             "username": "henrykrippner53",
             "email": "zhe25@mail.nz",
             "firstName": "Henry",
-            "lastName": "Krippner"
+            "lastName": "Krippner",
+            "password": "TulAEaNOh"
         },
         {
             "username": "ellayellow91",
             "email": "lfg23@mail.nz",
             "firstName": "Ella",
-            "lastName": "Yellow"
+            "lastName": "Yellow",
+            "password": "3K01sXmKq3"
         },
         {
             "username": "finnveale42",
             "email": "ama541@mail.nz",
             "firstName": "Finn",
-            "lastName": "Veale"
+            "lastName": "Veale",
+            "password": "rH8ufTBvC"
         },
         {
             "username": "jasonmendoza15",
             "email": "boooooortles@hotmail.com",
             "firstName": "Jason",
-            "lastName": "Mendoza"
+            "lastName": "Mendoza",
+            "password": "4O4UR9KY"
         },
         {
             "username": "mindystclaire59",
             "email": "mindystclaire@gmail.com",
             "firstName": "Mindy",
-            "lastName": "St. Claire"
+            "lastName": "St. Claire",
+            "password": "zVFVHB3fV"
         },
         {
             "username": "simonegarnett30",
             "email": "s.garnett@stjohns.edu.au",
             "firstName": "Simone",
-            "lastName": "Garnett"
+            "lastName": "Garnett",
+            "password": "CXnu94Qb"
         },
         {
             "username": "stevenpeleaz71",
             "email": "pillboi@ymail.com",
             "firstName": "Steven",
-            "lastName": "Peleaz"
+            "lastName": "Peleaz",
+            "password": "4RqoAnxu"
         },
         {
             "username": "larryhemsworth89",
             "email": "larryhemsworth@gmail.com",
             "firstName": "Larry",
-            "lastName": "Hemsworth"
+            "lastName": "Hemsworth",
+            "password": "NG6eEJ9s1"
         },
         {
             "username": "kamilahal-jamil83",
             "email": "kamilah.aljamil@ox.ac.uk",
             "firstName": "Kamilah",
-            "lastName": "Al-Jamil"
+            "lastName": "Al-Jamil",
+            "password": "vdNme0F0NJ"
         },
         {
             "username": "johnwheaton70",
             "email": "johnwheaton@gmail.com",
             "firstName": "John",
-            "lastName": "Wheaton"
+            "lastName": "Wheaton",
+            "password": "glBIRWELht"
         },
         {
             "username": "tanetaumata52",
             "email": "tane.mahuta@example.com",
             "firstName": "Tane",
-            "lastName": "Taumata"
+            "lastName": "Taumata",
+            "password": "UFX5nusxT"
         },
         {
             "username": "bobjones92",
             "email": "bobbyjones@example.com",
             "firstName": "Bob",
-            "lastName": "Jones"
+            "lastName": "Jones",
+            "password": "kQV5lYRY"
         },
         {
             "username": "morganenglish98",
             "email": "m@m.com",
             "firstName": "Morgan",
-            "lastName": "English"
+            "lastName": "English",
+            "password": "SfB0npkl"
         }
     ]
 }

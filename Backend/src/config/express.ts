@@ -18,6 +18,10 @@ export default () => {
         next()
     })
 
+    app.get("/", (req, res) => {
+        res.status(200).send("Hello World!");
+    })
+
     // ROUTES
     require('../app/routes/bricklink.routes')(app)
     require('../app/routes/user.routes')(app)
