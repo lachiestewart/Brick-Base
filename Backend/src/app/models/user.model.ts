@@ -1,6 +1,4 @@
 import * as db from '../../config/db'
-// import { ObjectId } from 'mongodb';
-
 
 const userCollection = process.env.USER_COLLECTION
 

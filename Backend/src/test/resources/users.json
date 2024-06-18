@@ -24,5 +24,12 @@
         "firstName": "Kristy",
         "lastName": "Lincoln",
         "password": "badPassword"
+    },
+    "userWithItems": {
+        "username": "morganenglish98",
+        "email": "m@m.com",
+        "firstName": "Morgan",
+        "lastName": "English",
+        "password": "SfB0npkl"
     }
 }

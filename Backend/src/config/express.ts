@@ -26,6 +26,7 @@ export default () => {
     require('../app/routes/bricklink.routes')(app)
     require('../app/routes/user.routes')(app)
     require('../app/routes/backdoor.routes')(app)
+    require('../app/routes/userItems.routes')(app)
 
     return app
 }

@@ -7,4 +7,5 @@ type User = {
     lastName?: string
     birthDate?: Date
     profilePictureUrl?: string
+    items?: BricklinkItemRequest[]
 }

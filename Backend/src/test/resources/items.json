@@ -1,0 +1,14 @@
+{
+    "newItem": {
+        "no": "6210-1",
+        "type": "SET"
+    },
+    "itemToRemove": {
+        "no": "6212-1",
+        "type": "SET"
+    },
+    "remainingItem": {
+        "no": "9492-1",
+        "type": "SET"
+    }
+}

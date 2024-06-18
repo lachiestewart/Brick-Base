@@ -26,7 +26,7 @@ const generateAuthHeader = (httpMethod: string, endPoint: string): string => {
         oauth_version: '1.0',
         oauth_consumer_key: consumerKey,
         oauth_token: tokenValue,
-        oauth_timestamp: Math.floor(Date.now() / 1000),
+        oauth_timestamp: Math.floor(Date.now() / 1000) + 2,
         oauth_signature_method: 'HMAC-SHA1'
     }
 
@@ -45,6 +45,8 @@ const generateAuthHeader = (httpMethod: string, endPoint: string): string => {
 }
 
 const getItem = async ({ no, type }: BricklinkItemRequest) => {
+    console.log(no) 
+    console.log(type)
     const endPoint = `/items/${type.toLowerCase()}/${no}`
     const authHeader = generateAuthHeader('GET', endPoint)
     const response = await bricklink.get(endPoint, {

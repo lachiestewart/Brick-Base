@@ -1,4 +1,4 @@
-import * as bricklink from '../../config/bricklinkApi'
+import * as bricklinkApi from '../../config/bricklinkApi'
 import { Request, Response } from "express"
 
 const getSet = async (req: Request, res: Response): Promise<void> => {
@@ -8,7 +8,7 @@ const getSet = async (req: Request, res: Response): Promise<void> => {
             no: setNumber,
             type: 'SET'
         }
-        const data = await bricklink.getItem(itemRequest)
+        const data = await bricklinkApi.getItem(itemRequest)
         res.status(200).send(data)
     } catch {
         res.status(500).send()

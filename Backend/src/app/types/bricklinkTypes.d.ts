@@ -1,6 +1,6 @@
-type itemType = 'MINIFIG' | 'PART' | 'SET' | 'BOOK' | 'GEAR' | 'CATALOG' | 'INSTRUCTION' | 'UNSORTED_LOT' | 'ORIGINAL_BOX'
+type itemType = "MINIFIG" | "PART" | "SET" | "BOOK" | "GEAR" | "CATALOG" | "INSTRUCTION" | "UNSORTED_LOT" | "ORIGINAL_BOX"
 
-type appearsAsType = 'A' | 'C' | 'E' | 'R'
+type appearsAsType = "A" | "C" | "E" | "R"
 
 type BricklinkItem = {
     no: string
@@ -65,7 +65,7 @@ type BricklinkSubsetRequest = {
 
 type BricklinkPriceGuide = {
     item: BricklinkItem
-    new_or_used: 'N' | 'U'
+    new_or_used: "N" | "U"
     currency_code: string
     min_price: string
     max_price: string

@@ -138,7 +138,17 @@
             "email": "m@m.com",
             "firstName": "Morgan",
             "lastName": "English",
-            "password": "SfB0npkl"
+            "password": "SfB0npkl",
+            "items": [
+                {
+                    "no": "6212-1",
+                    "type": "SET"
+                },
+                {
+                    "no": "9492-1",
+                    "type": "SET"
+                }
+            ]
         }
     ]
 }

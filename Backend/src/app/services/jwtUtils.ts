@@ -3,13 +3,22 @@ import jwt from 'jsonwebtoken'
 const jwtSecretKey = process.env.JWT_SECRET_KEY
 const jwtExpirationTime = process.env.JWT_EXPIRATION_TIME
 
-const generateToken = (payload: User) => {
-  const secretKey = jwtSecretKey
+const generateToken = (user: User) => {
   const options = {
     expiresIn: jwtExpirationTime
   }
-  const token = jwt.sign(payload, secretKey, options)
+  user.password = undefined
+  user.items = undefined
+  const token = jwt.sign(user, jwtSecretKey, options)
   return token
 }
 
-export { generateToken }
+const decodeToken = (token: string): User | null => {
+  const content = jwt.verify(token, jwtSecretKey)
+  if (typeof content === 'string') {
+    return null
+  }
+  return content as User
+}
+
+export { generateToken, decodeToken }

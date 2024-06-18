@@ -1,9 +1,9 @@
 import { Request, Response } from 'express'
-import * as backdoor from '../models/backdoor.model'
+import * as backdoorModel from '../models/backdoor.model'
 
 const clear = async (req: Request, res: Response) => {
     try {
-        await backdoor.clearUsers()
+        await backdoorModel.clearUsers()
         res.status(200).send()
     } catch (error) {
         console.log(error)
@@ -12,7 +12,7 @@ const clear = async (req: Request, res: Response) => {
 
 const reset = async (req: Request, res: Response) => {
     try {
-        await backdoor.resetUsers()
+        await backdoorModel.resetUsers()
         res.status(200).send()
     } catch (error) {
         console.log(error)
