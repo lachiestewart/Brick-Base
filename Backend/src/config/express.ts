@@ -1,13 +1,14 @@
 import express from "express"
 import bodyParser from "body-parser"
-import allowCrossOriginRequestsMiddleware from "../app/middleware/cors.middleware"
-
+import CORSMiddleware from "../app/middleware/cors.middleware"
+import rateLimit from "../app/middleware/rateLimiting.middleware"
 
 export default () => {
     const app = express()
 
     // Middleware
-    app.use(allowCrossOriginRequestsMiddleware)
+    app.use(CORSMiddleware)
+    app.use(rateLimit)
     app.use(bodyParser.json())
     app.use(bodyParser.raw({ type: 'text/plain' }))
     app.use(bodyParser.raw({ type: ['image/*'], limit: '5mb' }))
