@@ -45,7 +45,7 @@ const generateAuthHeader = (httpMethod: string, endPoint: string): string => {
 }
 
 const getItem = async ({ no, type }: BricklinkItemRequest) => {
-    console.log(no) 
+    console.log(no)
     console.log(type)
     const endPoint = `/items/${type.toLowerCase()}/${no}`
     const authHeader = generateAuthHeader('GET', endPoint)

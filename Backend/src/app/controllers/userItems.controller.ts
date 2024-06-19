@@ -20,7 +20,7 @@ const getAllItemsForUser = async (req: Request, res: Response) => {
 const addItem = async (req: Request, res: Response) => {
     try {
         // need to validate item type
-        await userItemsModel.addItem(req.body.user.email, { 
+        await userItemsModel.addItem(req.body.user.email, {
             no: req.body.no,
             type: req.body.type as itemType
         })
@@ -42,6 +42,6 @@ const removeItem = async (req: Request, res: Response) => {
     } catch {
         res.status(500).send()
     }
-} 
+}
 
 export { addItem, getAllItemsForUser, removeItem }

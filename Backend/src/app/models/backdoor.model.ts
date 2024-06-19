@@ -14,7 +14,7 @@ const parseUser = async (user: any): Promise<User> => {
 
     return {
         ...user,
-        password: password,
+        password,
         items: user.items ? user.items.filter(validateItemType) : []
     }
 }

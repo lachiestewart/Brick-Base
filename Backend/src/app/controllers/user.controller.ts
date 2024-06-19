@@ -32,7 +32,7 @@ const register = async (req: Request, res: Response) => {
         }
         user.password = await passwordService.hash(user.password)
         await userModel.register(user)
-        res.status(201).send(user._id)
+        res.status(201).send()
     } catch {
         res.status(500).send()
     }
