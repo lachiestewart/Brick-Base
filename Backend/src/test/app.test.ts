@@ -199,11 +199,10 @@ describe("Items tests", () => {
 
   test("Remove item from user's items list", done => {
     request(app)
-      .delete(baseUrl + "/items")
-      .send(items.itemToRemove)
+      .delete(baseUrl + "/items?no=" + items.itemToRemove.no + "&type=" + items.itemToRemove.type)
       .set("Authorization", userWithItemsToken)
       .then(deleteResponse => {
-        expect(deleteResponse.statusCode).toBe(200)
+        expect(deleteResponse.statusCode).toBe(204)
         request(app)
           .get(baseUrl + "/items")
           .set("Authorization", userWithItemsToken)

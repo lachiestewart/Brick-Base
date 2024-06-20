@@ -32,11 +32,13 @@ const addItem = async (req: Request, res: Response) => {
 
 // Possibly should change to return updated items list, same for addItem
 const removeItem = async (req: Request, res: Response) => {
+    const item: BricklinkItemRequest = {
+        no: req.query.no as string,
+        type: req.query.type as itemType
+    }
     try {
-        await userItemsModel.removeItem(req.body.user.email, req.body)
-        res.status(200).send({
-            message: "Item removed"
-        })
+        await userItemsModel.removeItem(req.body.user.email, item)
+        res.status(204).send()
     } catch {
         res.status(500).send()
     }
