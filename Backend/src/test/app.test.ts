@@ -7,6 +7,10 @@ import * as items from './resources/items.json'
 
 const app = express()
 
+const baseUrl = "/api/v1"
+
+const invalidToken = "badToken"
+
 beforeAll(async () => {
   await db.connect()
 })
@@ -34,7 +38,7 @@ describe("User account tests", () => {
   // Get all users which should be default 20
   test("Get all users", done => {
     request(app)
-      .get("/api/v1/users")
+      .get(baseUrl + "/users")
       .then(response => {
         expect(response.statusCode).toBe(200)
         expect((response.body as []).length).toBe(20)
@@ -45,13 +49,13 @@ describe("User account tests", () => {
   // Register a valid user and check that they were added to the database
   test("Valid register", done => {
     request(app)
-      .post("/api/v1/users/register")
+      .post(baseUrl + "/users/register")
       .send(users.validUser)
       .then(response => {
         expect(response.statusCode).toBe(201)
         expect(response.body).toBeDefined()
         request(app)
-          .get("/api/v1/user?email=" + users.validUser.email)
+          .get(baseUrl + "/user?email=" + users.validUser.email)
           .then(response => {
             expect(response.statusCode).toBe(200)
             expect(response.body.email).toBe(users.validUser.email)
@@ -64,7 +68,7 @@ describe("User account tests", () => {
   // Try to register a user with a weak password
   test("Invalid register, weak password", done => {
     request(app)
-      .post("/api/v1/users/register")
+      .post(baseUrl + "/users/register")
       .send(users.weakPasswordUser)
       .then(response => {
         expect(response.statusCode).toBe(400)
@@ -76,7 +80,7 @@ describe("User account tests", () => {
   // Try to register a user with an email that already exists
   test("Invalid register, email already in use", done => {
     request(app)
-      .post("/api/v1/users/register")
+      .post(baseUrl + "/users/register")
       .send(users.registeredUser)
       .then(response => {
         expect(response.statusCode).toBe(400)
@@ -87,7 +91,7 @@ describe("User account tests", () => {
 
   test("Check user exists", done => {
     request(app)
-      .get("/api/v1/user?email=" + users.registeredUser.email)
+      .get(baseUrl + "/user?email=" + users.registeredUser.email)
       .then(response => {
         expect(response.statusCode).toBe(200)
         expect(response.body.email).toBe(users.registeredUser.email)
@@ -98,7 +102,7 @@ describe("User account tests", () => {
 
   test("Valid login", done => {
     request(app)
-      .post("/api/v1/users/login")
+      .post(baseUrl + "/users/login")
       .send(users.registeredUser)
       .then(response => {
         expect(response.statusCode).toBe(200)
@@ -110,7 +114,7 @@ describe("User account tests", () => {
   // Try to login with a user that doesn't exist
   test("Invalid login, unregistered user", done => {
     request(app)
-      .post("/api/v1/users/login")
+      .post(baseUrl + "/users/login")
       .send(users.weakPasswordUser)
       .then(response => {
         expect(response.statusCode).toBe(404)
@@ -122,7 +126,7 @@ describe("User account tests", () => {
   // Try to login with a user that has the wrong password
   test("Invalid login, wrong password", done => {
     request(app)
-      .post("/api/v1/users/login")
+      .post(baseUrl + "/users/login")
       .send(users.incorrectPasswordUser)
       .then(response => {
         expect(response.statusCode).toBe(401)
@@ -139,13 +143,13 @@ describe("Items tests", () => {
 
   beforeAll(async () => {
     await request(app)
-      .post("/api/v1/users/login")
+      .post(baseUrl + "/users/login")
       .send(users.registeredUser)
       .then(response => {
         userWithNoItemsToken = response.headers.authorization
       })
-      await request(app)
-      .post("/api/v1/users/login")
+    await request(app)
+      .post(baseUrl + "/users/login")
       .send(users.userWithItems)
       .then(response => {
         userWithItemsToken = response.headers.authorization
@@ -162,15 +166,26 @@ describe("Items tests", () => {
       })
   })
 
+  test("Get all items for a user", done => {
+    request(app)
+      .get(baseUrl + "/items")
+      .set("Authorization", userWithItemsToken)
+      .then(response => {
+        expect(response.statusCode).toBe(200)
+        expect(response.body.length).toBe(2)
+        done()
+      })
+  })
+
   test("Add item to user's items list", done => {
     request(app)
-      .post("/api/v1/items")
+      .post(baseUrl + "/items")
       .send(items.newItem)
       .set("Authorization", userWithNoItemsToken)
       .then(postResponse => {
         expect(postResponse.statusCode).toBe(201)
         request(app)
-          .get("/api/v1/items")
+          .get(baseUrl + "/items")
           .set("Authorization", userWithNoItemsToken)
           .then(getResponse => {
             expect(getResponse.statusCode).toBe(200)
@@ -184,22 +199,42 @@ describe("Items tests", () => {
 
   test("Remove item from user's items list", done => {
     request(app)
-      .delete("/api/v1/items")
+      .delete(baseUrl + "/items")
       .send(items.itemToRemove)
       .set("Authorization", userWithItemsToken)
       .then(deleteResponse => {
         expect(deleteResponse.statusCode).toBe(200)
         request(app)
-          .get("/api/v1/items")
+          .get(baseUrl + "/items")
           .set("Authorization", userWithItemsToken)
           .then(getResponse => {
-            console.log(getResponse.body)
             expect(getResponse.statusCode).toBe(200)
             expect(getResponse.body.length).toBe(1)
             expect(getResponse.body[0].type).toBe(items.remainingItem.type)
             expect(getResponse.body[0].no).toBe(items.remainingItem.no)
             done()
           })
+      })
+  })
+
+  test("Try to get items without being authenticated", done => {
+    request(app)
+      .get(baseUrl + "/items")
+      .then(response => {
+        expect(response.statusCode).toBe(401)
+        expect(response.body.message).toBe("Unauthorized")
+        done()
+      })
+  })
+
+  test("Try to get items with invalid authentication", done => {
+    request(app)
+      .get(baseUrl + "/items")
+      .set("Authorization", invalidToken)
+      .then(response => {
+        expect(response.statusCode).toBe(401)
+        expect(response.body.message).toBe("Unauthorized")
+        done()
       })
   })
 

@@ -1,22 +1,20 @@
 openapi: 3.0.0
 info:
   title: Brick Base
-  description:  |-
+  description: |-
     A web app to keep track of your LEGO sets and their value.
-    
+
     All endpoints are prefixed with the base url of /api/v1
-    
+
     Some useful links:
     - [Bricklink](https://www.bricklink.com/v2/main.page)
     - [Mongo Atlas](https://www.mongodb.com/products/platform/atlas-database)
-  
   contact:
     email: lachiestewart2003@gmail.com
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   version: 1.0.0
-
 tags:
   - name: users
     description: Endpoints for user related actions
@@ -24,9 +22,7 @@ tags:
     description: Endpoints for handling user's items
   - name: backend
     description: Endpoints used during development
-
 paths:
-
   /clear:
     post:
       tags:
@@ -42,7 +38,6 @@ paths:
                 $ref: '#/components/schemas/Message'
         '500':
           description: Internal server error
-
   /reset:
     post:
       tags:
@@ -56,10 +51,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Message'
-                
         '500':
           description: Internal server error
-
   /user/register:
     post:
       tags:
@@ -72,7 +65,7 @@ paths:
             schema:
               $ref: '#/components/schemas/User'
         required: true
-      responses: 
+      responses:
         '201':
           description: User registered successfully
         '400':
@@ -83,7 +76,6 @@ paths:
                 $ref: '#/components/schemas/Message'
         '500':
           description: Internal server error
-
   /users:
     get:
       tags:
@@ -101,7 +93,6 @@ paths:
                   $ref: '#/components/schemas/User'
         '500':
           description: Internal server error
-
   /user:
     get:
       tags:
@@ -109,10 +100,12 @@ paths:
       summary: Get a Brick Base user by their email address
       operationId: getUserByEmail
       parameters:
-        - name: Email Address 
+        - name: Email Address
           in: query
           description: Email address of the user to get
           required: true
+          schema:
+            type: string
       responses:
         '200':
           description: The Brick Base user with the given email address
@@ -128,15 +121,101 @@ paths:
                 $ref: '#/components/schemas/Message'
         '500':
           description: Internal server error
-  
+
   /users/login:
     post:
-      tags: 
+      tags:
         - users
       summary: Login a registered Brick Base user
       operationId: loginUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+        required: true
       responses:
-        ''
+        '200':
+          description: User logged in successfully
+          headers: 
+            Authorization:
+              schema:
+                type: string
+              description: JWT user token
+        '400':
+          description: Invalid request
+          content: 
+            application/json:
+              $ref: '#/components/schemas/Message'
+        '404':
+          description: No Brick Base user for the given email address
+          content: 
+            application/json:
+              $ref: '#/components/schemas/Message' 
+        '401':
+          description: Incorrect password for the given email address
+          content: 
+            application/json:
+              $ref: '#/components/schemas/Message' 
+        '500':
+          description: Internal server error
+  
+  /items:
+    post:
+      tags:
+          - items
+      summary: Add an item to a user's items list 
+      operationId: addItem
+      parameters:
+        - $ref: '#/components/parameters/jwtToken'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BricklinkItemRequest' 
+        required: true 
+      responses:
+        '201':
+          description: Successfully added item to user's item list
+        '400':
+          description: Invalid item
+          content:
+            application/json:
+              $ref: '#/components/schemas/Message' 
+        '500':
+          description: Internal server error
+          
+    get:
+      tags:
+          - items
+      summary: Get all items in a user's items list
+      operationId: getAllItems
+      parameters:
+        - $ref: '#/components/parameters/jwtToken'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BricklinkItemRequest'
+          
+
+    delete:
+      tags:
+          - items
+      summary: Remove an item from a user's items list
+      operationId: removeItem
+      requestBody:
+        content:
+          application/json:
+          
 
 components:
   schemas:
@@ -164,10 +243,9 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BricklinkItemRequest'
-
     BricklinkItem:
       required:
-        - no
+        - 'no'
         - name
         - type
         - category_id
@@ -182,7 +260,7 @@ components:
         - is_obsolete
       type: object
       properties:
-        no:
+        'no':
           type: string
         name:
           type: string
@@ -216,11 +294,11 @@ components:
           nullable: true
     BricklinkItemRequest:
       required:
-        - no
+        - 'no'
         - type
       type: object
       properties:
-        no:
+        'no':
           type: string
         type:
           type: string
@@ -242,12 +320,12 @@ components:
                 type: string
     BricklinkSupersetRequest:
       required:
-        - no
+        - 'no'
         - type
         - color_id
       type: object
       properties:
-        no:
+        'no':
           type: string
         type:
           type: string
@@ -277,7 +355,7 @@ components:
                 type: boolean
     BricklinkSubsetRequest:
       required:
-        - no
+        - 'no'
         - type
         - color_id
         - box
@@ -286,7 +364,7 @@ components:
         - break_subsets
       type: object
       properties:
-        no:
+        'no':
           type: string
         type:
           type: string
@@ -308,7 +386,7 @@ components:
         new_or_used:
           type: string
           enum:
-            - N
+            - 'N'
             - U
         currency_code:
           type: string
@@ -377,3 +455,12 @@ components:
         message:
           type: string
           description: Message indicating the result of the operation
+  parameters:
+    jwtToken:
+      name: Authorization
+      in: header
+      required: true
+      description: JWT token generated by logging a user in
+      schema:
+        type: string
+        format: jwt

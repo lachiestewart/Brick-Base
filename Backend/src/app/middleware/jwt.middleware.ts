@@ -1,10 +1,21 @@
 import * as jwtUtils from '../services/jwtUtils'
 import { NextFunction, Request, Response } from 'express'
 
-const authenticate = (req: Request, res: Response, next: NextFunction) => {
+const authenticate = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const token: string = req.header('Authorization')
-        const user = jwtUtils.decodeToken(token)
+        let user: User
+        try {
+            user = jwtUtils.decodeToken(token)
+        } catch {}
+
+        if (!token || !user) {
+            res.status(401).send({
+                message: "Unauthorized"
+            })
+            return
+        }
+        
         req.body.user = user
         next()
     } catch (err) {

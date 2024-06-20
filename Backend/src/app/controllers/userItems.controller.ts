@@ -24,9 +24,7 @@ const addItem = async (req: Request, res: Response) => {
             no: req.body.no,
             type: req.body.type as itemType
         })
-        res.status(201).send({
-            message: "Item added"
-        })
+        res.status(201).send()
     } catch {
         res.status(500).send()
     }
