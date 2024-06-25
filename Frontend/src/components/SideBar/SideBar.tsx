@@ -10,11 +10,19 @@ const NavBar = () => {
 
   const toggleOpen = () => setOpen(!open)
   return (
-    <div className={`h-screen ${open ? 'w-1/3' : 'w-min'} max-w-60 bg-red-500`}>
-      {open ? <Cancel01Icon onClick={toggleOpen} className='cursor-pointer'/> : <Menu01Icon onClick={toggleOpen} className='cursor-pointer'/>}
+    <div className={`h-screen ${open ? 'w-1/3' : 'w-min'} max-w-60 bg-red-500 flex flex-col items-center`}>
+      
+      <div className='w-full flex flex-row flex-wrap'>
+        <div className={open ? 'w-14' : 'w-full'}>
+          <img src='/icon.svg' alt='logo' className='bg-cover' />
+        </div>
+        {open && <h1 className='text-2xl text-center ml-2'>Brick Base</h1>}
+      </div>
+
+      {open ? <Cancel01Icon onClick={toggleOpen} className='cursor-pointer h-10' /> : <Menu01Icon onClick={toggleOpen} className='cursor-pointer h-10' />}
       <SideBarSearch open={open} setOpen={setOpen} />
-      <SideBarItem title='Dashboard' icon={<AnalyticsUpIcon className='w-7 h-7' />} to='/dashboard' open={open} />
-      <SideBarItem title='Collection' icon={<Folder01Icon className='w-7 h-7' />} to='/collection' open={open} />
+      <SideBarItem title='Dashboard' icon={AnalyticsUpIcon} to='/dashboard' open={open} />
+      <SideBarItem title='Collection' icon={Folder01Icon} to='/collection' open={open} />
       <SideBarDivider />
     </div>
   )

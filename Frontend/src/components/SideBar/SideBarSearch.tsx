@@ -9,11 +9,11 @@ const SideBarSearch = (props: SideBarSearchProps) => {
     return (
         <label
             htmlFor='sidebar-searchbox'
-            className='flex flex-row gap-5 bg-slate-50 rounded-sm'
+            className='flex flex-row gap-5 bg-slate-50 rounded-sm w-min my-1'
         >
             <Search01Icon
                 onClick={() => props.setOpen(true)}
-                className='cursor-pointer w-7 h-7'
+                className='cursor-pointer w-7 h-7 p-1'
             />
             {props.open &&
                 <input

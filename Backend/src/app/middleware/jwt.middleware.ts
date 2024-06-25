@@ -5,17 +5,20 @@ const authenticate = async (req: Request, res: Response, next: NextFunction) => 
     try {
         const token: string = req.header('Authorization')
         let user: User
+        let validToken = true
         try {
             user = jwtUtils.decodeToken(token)
-        } catch {}
+        } catch {
+            validToken = false
+        }
 
-        if (!token || !user) {
+        if (!token || !validToken) {
             res.status(401).send({
                 message: "Unauthorized"
             })
             return
         }
-        
+
         req.body.user = user
         next()
     } catch (err) {
