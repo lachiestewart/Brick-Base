@@ -1,22 +1,25 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import SideBar from './components/SideBar'
-import DashBoard from './pages'
+import { SideBar } from './components'
+import { DashBoard, Home, Collection, NoNoPage } from './pages'
 
 const App = () => {
   return (
     <Router>
-      <div className='flex flex-row'>
+      <div className='flex flex-row h-screen'>
         <SideBar />
-        <Routes>
-          <Route path='/' element={<div>Home</div>} />
-          <Route path='/about' element={<div>About</div>} />
-          <Route path='/dashboard' element={<DashBoard />} />
-          <Route path='/collection' element={<div>Collection</div>} />
-        </Routes>
+        <div className='w-full h-full overflow-scroll flex flex-col items-center py-5'>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/about' element={<div>About</div>} />
+            <Route path='/dashboard' element={<DashBoard />} />
+            <Route path='/collection/:id' element={<Collection />} />
+            <Route path="*" element={<NoNoPage />} />
+          </Routes>
+        </div>
       </div>
 
     </Router>
   )
 }
 
-export default App
+export { App }

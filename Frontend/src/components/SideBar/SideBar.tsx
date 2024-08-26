@@ -3,16 +3,22 @@ import SideBarItem from './SideBarItem'
 import SideBarSearch from './SideBarSearch'
 import SideBarDivider from './SideBarDivider'
 import { AnalyticsUpIcon, Menu01Icon, Cancel01Icon, Folder01Icon } from 'hugeicons-react'
+import { useNavigate } from 'react-router-dom'
 
 
-const NavBar = () => {
+const SideBar = () => {
   const [open, setOpen] = useState(false)
 
   const toggleOpen = () => setOpen(!open)
+
+  const navigate = useNavigate();
+
+  const handleClick = () => navigate('/')
+
   return (
-    <div className={`h-screen ${open ? 'w-1/3' : 'w-min'} max-w-60 bg-red-500 flex flex-col items-center`}>
-      
-      <div className='w-full flex flex-row flex-wrap'>
+    <div className={`h-full ${open ? 'w-1/3' : 'w-min'} max-w-60 bg-red-500 flex flex-col items-center sticky`}>
+
+      <div className='w-full flex flex-row flex-wrap cursor-pointer' onClick={handleClick}>
         <div className={open ? 'w-14' : 'w-full'}>
           <img src='/icon.svg' alt='logo' className='bg-cover' />
         </div>
@@ -28,4 +34,4 @@ const NavBar = () => {
   )
 }
 
-export default NavBar
+export { SideBar }
