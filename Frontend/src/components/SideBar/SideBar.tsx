@@ -28,7 +28,7 @@ const SideBar = () => {
       {open ? <Cancel01Icon onClick={toggleOpen} className='cursor-pointer h-10' /> : <Menu01Icon onClick={toggleOpen} className='cursor-pointer h-10' />}
       <SideBarSearch open={open} setOpen={setOpen} />
       <SideBarItem title='Dashboard' icon={AnalyticsUpIcon} to='/dashboard' open={open} />
-      <SideBarItem title='Collection' icon={Folder01Icon} to='/collection' open={open} />
+      <SideBarItem title='Collection' icon={Folder01Icon} to='/collections' open={open} />
       <SideBarDivider />
     </div>
   )

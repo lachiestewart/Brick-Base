@@ -39,6 +39,38 @@ import { ItemCard } from '../components';
     <Line type="monotone" dataKey="value" stroke="#8884d8" activeDot={{ r: 8 }} />
 </LineChart> */}
 
+
+const sets = [
+    {
+        id: 1,
+        name: "Set 1",
+        description: "Set 1 Description",
+        value: 326.8,
+        percentIncrease: 0.5,
+    },
+    {
+        id: 2,
+        name: "Set 2",
+        description: "Set 2 Description",
+        value: 42.3,
+        percentIncrease: 0.5,
+    },
+    {
+        id: 3,
+        name: "Set 3",
+        description: "Set 3 Description",
+        value: 2003.4,
+        percentIncrease: 20,
+    },
+    {
+        id: 4,
+        name: "Set 4",
+        description: "Set 4 Description",
+        value: 66.7,
+        percentIncrease: 34.3,
+    },
+];
+
 const Collection = () => {
 
     const { id } = useParams();
@@ -64,10 +96,19 @@ const Collection = () => {
                 </div>
             </div>
             <div className='w-full p-2 flex flex-col gap-1'>
-                <ItemCard/>
-                <ItemCard/>
-                <ItemCard/>
-                <ItemCard/>
+                {
+                    sets.map(set =>
+                        <ItemCard
+                            key={set.id}
+                            id={set.id}
+                            name={set.name}
+                            description={set.description}
+                            value={set.value}
+                            percentIncrease={set.percentIncrease}
+                            to={`/nonopage`}
+                        />)
+                }
+                <ItemCard to="/search" id={undefined} name={undefined} description={undefined} value={undefined} percentIncrease={undefined}/>
             </div>
         </div>
     );
